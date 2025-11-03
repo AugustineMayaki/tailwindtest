@@ -1,0 +1,244 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* INPUT COMPONENTS */
+  .input {
+    @apply w-full focus:ring-0 focus:outline-none font-medium;
+  }
+
+  .input_label {
+    @apply text-primary-black font-medium text-sm mb-[10px] inline-block;
+  }
+
+  .full_rounded_input {
+    @apply rounded-full h-10 border text-base px-4 py-3 border-primary-gray100 focus:border-primary-blue placeholder:text-primary-gray600 placeholder:font-normal text-primary-gray_main;
+  }
+
+  /* BUTTON */
+  .button {
+    @apply py-3 px-6 rounded-3xl h-10 flex items-center justify-center font-semibold;
+  }
+  .outline_button {
+    @apply border border-primary-main bg-transparent gap-[10px] text-primary-main;
+  }
+  .default_button {
+    @apply bg-primary-blue gap-[10px] text-primary-white w-full;
+  }
+  .subtle_button {
+    @apply bg-primary-blue20 gap-[10px] text-primary-main;
+  }
+
+  /* AUTH */
+  .forgot_password {
+    @apply text-primary-blue border-b border-primary-blue
+ hover:border-primary-blue font-medium text-base w-fit flex items-center gap-1 cursor-pointer hover:text-[#3a7fce];
+  }
+
+  /* GLASSY EFFECT */
+  .bg-glassy-blue {
+    background: linear-gradient(
+      135deg,
+      rgba(240, 248, 255, 0.7) 0%,
+      rgba(219, 234, 254, 0.6) 100%
+    );
+    /* backdrop-filter: blur(10px); */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(219, 234, 254, 0.3);
+  }
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.hidden-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow: -moz-scrollbars-none;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.rdp-root .rdp-weeks tr td[aria-selected="true"] {
+  background-color: #1565c0 !important;
+  color: white !important;
+}
+.rdp-root .rdp-weeks tr td button[aria-label^="Today"] {
+  background-color: #4385d0 !important;
+  color: white !important;
+}
+
+.rdp-root button[role="combobox"] {
+  /* Your custom styles */
+  box-shadow: none !important;
+  outline: none !important;
+  --tw-ring-offset-width: 0px !important;
+  --tw-ring-color: transparent !important;
+  background: transparent !important;
+}
+
+[data-radix-popper-content-wrapper] .border-border.border-t.p-3 > div > input {
+  /* Your custom styles */
+  box-shadow: none !important;
+  outline: none !important;
+  --tw-ring-offset-width: 0px !important;
+  --tw-ring-color: transparent !important;
+  background: transparent !important;
+}
+[data-radix-popper-content-wrapper]
+  .border-border.border-t.p-3
+  > div
+  > input:focus {
+  /* Your custom styles */
+  box-shadow: none !important;
+  outline: none !important;
+  --tw-ring-offset-width: 0px !important;
+  --tw-ring-color: transparent !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+[data-radix-popper-content-wrapper]
+  .border-border.border-t.p-3
+  > div
+  button[role="combobox"]:focus {
+  /* Your custom styles */
+  box-shadow: none !important;
+  outline: none !important;
+  --tw-ring-offset-width: 0px !important;
+  --tw-ring-color: transparent !important;
+  background: transparent !important;
+}
+
+.hide-arrows::-webkit-outer-spin-button,
+.hide-arrows::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-arrows[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.shimmer-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  animation: shimmer 1.8s infinite ease-in-out;
+}
+
+.shimmer-skeleton {
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(242, 242, 242, 0.5) 25%,
+    rgba(227, 226, 226, 0.5) 50%,
+    rgba(242, 242, 242, 0.5) 75%
+  );
+  background-size: 200% 100%;
+  filter: blur(8px);
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-140%);
+  }
+
+  100% {
+    transform: translateX(140%);
+  }
+}
