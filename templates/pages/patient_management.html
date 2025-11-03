@@ -1,0 +1,61 @@
+{% extends "layouts/private_layout.html" %}
+{% from "components/card.html" import render as Card %}
+{% from "components/button.html" import render as Button %}
+{% block main_content %}
+    <div class="max-w-7xl mx-auto">
+        {% set add_button %}
+            <form action='{{ url_for("new_patient") }}' method="get">
+                {% call Button(button_class='default_button !px-3 !text-sm') %}
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24"
+                         fill="currentColor"
+                         class="w-4 h-4">
+                        <path d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z" />
+                    </svg>
+                    Add New
+                {% endcall %}
+            </form>
+        {% endset %}
+        {% call Card(
+            container_class='flex flex-col max-h-[calc(100vh-56px)]',
+            title='Patients',
+            button=add_button
+            ) %}
+            <div class="flex flex-col flex-1 overflow-y-auto hidden-scrollbar">
+                <table class="min-w-full divide-y divide-slate-200">
+                    <thead class="bg-slate-50 sticky top-0 z-10">
+                        <tr>
+                            <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">ID</th>
+                            <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Name</th>
+                            <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Email</th>
+                            <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Gender</th>
+                            <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Created</th>
+                            <th class="px-4 sm:px-6 py-3 text-right text-xs font-medium text-slate-600 uppercase tracking-wider">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 bg-white">
+                        {% for p in patients %}
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 sm:px-6 py-3 text-sm text-slate-700">{{ p.id }}</td>
+                                <td class="px-4 sm:px-6 py-3 text-sm font-medium text-slate-800">{{ p.name }}</td>
+                                <td class="px-4 sm:px-6 py-3 text-sm text-slate-700">{{ p.email }}</td>
+                                <td class="px-4 sm:px-6 py-3 text-sm text-slate-700">{{ p.gender }}</td>
+                                <td class="px-4 sm:px-6 py-3 text-sm text-slate-700">{{ p.created }}</td>
+                                <td class="px-4 sm:px-6 py-3 text-sm text-right space-x-2">
+                                    <a href="{{ url_for('patient_info', patient_id=p.id) }}"
+                                       class="inline-flex items-center gap-1 text-primary hover:underline">View</a>
+                                    <a href="{{ url_for('patient_info', patient_id=p.id) }}"
+                                       class="inline-flex items-center gap-1 text-red-600 hover:underline">Delete</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6" class="px-4 sm:px-6 py-6 text-center text-slate-500">No patients found.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endcall %}
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% macro render(pages) %}
+    <nav class=" w-[70px] 640:w-[110px] 1180:w-[256px] h-full sticky top-0  overflow-hidden  pb-5 pt-10 flex flex-col gap-11 880:gap-7 1180:gap-14 z-10 bg-primary-blue20">
+        <div class=" flex items-center justify-center w-full !h-[50px]">
+            <img class="w-[45px] 880:w-[80px] 1180:w-[120px] 1400:w-[134px] !h-[45px]"
+                 src="{{ url_for('static', filename='images/chilling.png') }}"
+                 alt="Logo"
+                 width=""
+                 height="" />
+        </div>
+        <div class="flex-1 flex flex-col justify-between ">
+            <ul class=" flex-1 flex flex-col items-center 1180:items-start gap-6 880:gap-4 pl-4 640:pl-6">
+                {% for page in pages %}
+                    <li class="w-full pl-3 640:pl-6 1180:pl-12 py-[10px] 1560:py-3 rounded-l-3xl text-primary-gray600 font-medium bg-slate-500 border-r-[5px] 560:border-r-[7px] border-r-slate-900">
+                        <a href="{{ page.url }}"
+                           class="flex items-center gap-4 w-full  text-primary-black rounded-lg transition-colors duration-200">
+                            <span class="text-2xl 880:text-xl 1180:text-2xl">{{ page.icon | safe }}</span>
+                            <span class="hidden 1180:inline text-sm font-medium">{{ page.name }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <ul class="1180:items-start gap-6 880:gap-4 pl-4 640:pl-6">
+                <li class=" w-full pl-3 640:pl-6 1180:pl-12 py-[10px] 1560:py-3 rounded-l-3xl text-primary-gray600 font-medium bg-slate-500 border-r-[5px] 560:border-r-[7px] border-r-slate-900 ">
+                    <a href='{{ url_for("login") }}'
+                       class="flex items-center gap-4 w-full  text-primary-black rounded-lg transition-colors duration-200 !h-[32px]">
+                        <span class="text-sm ">icon</span>
+                        <span class="hidden 1180:inline text-sm font-medium">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+{% endmacro %}

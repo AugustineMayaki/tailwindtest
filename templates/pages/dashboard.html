@@ -1,0 +1,3 @@
+{% extends "layouts/private_layout.html" %}
+{% from "modules/dashboard/overview_card.html" import render as overview_cards %}
+{% block main_content %}{{ overview_cards() }}{% endblock %}
