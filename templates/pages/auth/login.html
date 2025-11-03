@@ -12,7 +12,7 @@
       Logo
     </div>
     {% call Card() %}
-      <form action='{{ url_for("dashboard") }}'>
+      <form action='{{ url_for("patient_management") }}'>
         <h2 class="text-xl 560:text-2xl text-primary-black text-center font-medium">Login</h2>
         {{ Input(label='Email Address', placeholder='Enter your email address', input_class='full_rounded_input') }}
         {{ password_input(label='Password', placeholder='Enter your password', input_class='full_rounded_input') }}

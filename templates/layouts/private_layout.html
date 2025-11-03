@@ -2,14 +2,14 @@
 {% from "components/sidebar.html" import render as sidebar %}
 {% block content %}
     {% set navigation_pages = [
-            {'name': 'Dashboard', 'url': url_for('dashboard'), 'icon': '📊'},
             {'name': 'Patient Managment', 'url': url_for('patient_management'), 'icon': '👤'},
             {'name': 'Users Managment', 'url': url_for('users_management'), 'icon': '👤'},
+            {'name': 'Activity log', 'url': url_for('activity_log'), 'icon': '👤'},
             {'name': 'Settings', 'url': url_for('settings'), 'icon': '⚙️'}
         ] %}
     <div class="flex w-full h-screen overflow-hidden">
         {{ sidebar(pages=navigation_pages) }}
-        <main class="relative flex-1 overflow-y-auto bg-slate-100 h-lvh p-5 pt-9 pb-5 hidden-scrollbar {{ extra_class }}">
+        <main class="relative flex-1 overflow-y-auto bg-slate-100 h-lvh p-5 pt-7 pb-5 hidden-scrollbar {{ extra_class }}">
             {% block main_content %}{% endblock %}
         </main>
     </div>

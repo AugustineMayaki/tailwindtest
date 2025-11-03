@@ -119,6 +119,44 @@ PATIENTS = [
     },
 ]
 
+USERS_OVERVIEW=[
+    
+     {
+        "label": "Total users",
+        "value": "1,234",
+        "description": "Total registered users in the system"
+    },
+    {
+        "label": "Confirmed Users",
+        "value": "56",
+        "description": "Total users confirmed their accounts"
+    },
+    {
+        "label": "Unconfirmed Users",
+        "value": "3,421",
+        "description": "Total users pending confirmation"
+    }
+]
+
+PATIENTS_OVERVIEW=[
+    
+    {
+        "label": "Total Patients",
+        "value": "1,234",
+        "description": "Registered patients in the system"
+    },
+    {
+        "label": "Total Users",
+        "value": "56",
+        "description": "Active users managing data"
+    },
+    {
+        "label": "Total Predictions",
+        "value": "3,421",
+        "description": "Stroke predictions made"
+    }
+]
+
 @app.route("/")
 def login():
     return render_template('pages/auth/login.html')
@@ -142,7 +180,7 @@ def dashboard():
 @app.route("/patient-management")
 def patient_management():
     # In a real app, fetch from DB. For now, use demo list.
-    return render_template('pages/patient_management.html', patients=PATIENTS)
+    return render_template('pages/patient_management.html', patients=PATIENTS, patients_overview=PATIENTS_OVERVIEW)
 
 @app.route("/patient-management/<int:patient_id>")
 def patient_info(patient_id: int):
@@ -154,11 +192,16 @@ def patient_info(patient_id: int):
 @app.route("/patients/new")
 def new_patient():
     # Placeholder create form page
-    return render_template('pages/patient_new.html')
+    return render_template('pages/patient_new.html', )
 
 @app.route("/users-management")
 def users_management():
-    return render_template('pages/users_management.html')
+    return render_template('pages/users_management.html', users_overview=USERS_OVERVIEW)
+
+@app.route("/activity-log")
+def activity_log():
+    return render_template('pages/activity_log.html')
+
 
 @app.route("/settings")
 def settings():

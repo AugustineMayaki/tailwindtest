@@ -1,2 +1,48 @@
 {% extends "layouts/private_layout.html" %}
-{% block main_content %}<h1>Settings Content</h1>{% endblock %}
+{% from "components/card.html" import render as Card %}
+{% from "components/button.html" import render as Button %}
+{% from "components/Input.html" import render as Input %}
+{% from "components/password_input.html" import render as password_input %}
+{% block main_content %}
+    <div class="max-w-7xl mx-auto flex flex-col gap-6">
+        {% call Card(
+            container_class='flex flex-col max-h-[calc(100vh-100px)]',
+            title='Basic Information',
+            ) %}
+            <div class="flex flex-col flex-1 overflow-y-auto hidden-scrollbar">
+                <form action="">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {{ Input(label='First Name', placeholder='Enter your first name', input_class='full_rounded_input') }}
+                        {{ Input(label='Last Name', placeholder='Enter your last name', input_class='full_rounded_input') }}
+                        {{ Input(label='Email address', placeholder='Enter your email address', input_class='full_rounded_input') }}
+                        {{ Input(label='Gender', placeholder='Enter your email address', input_class='full_rounded_input') }}
+                    </div>
+                </form>
+            </div>
+            <div class="flex gap-4  justify-end ">
+                {% call Button(class_name='mt-5 max-w-[200px] w-full', button_class='default_button') %}
+                    <span>Update</span>
+                {% endcall %}
+            </div>
+        {% endcall %}
+        {% call Card(
+            container_class='flex flex-col max-h-[calc(100vh-100px)]',
+            title='Security',
+            ) %}
+            <div class="flex flex-col flex-1 overflow-y-auto hidden-scrollbar">
+                <form action="">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {{ password_input(label='Old Password', placeholder='Enter your old password', input_class='full_rounded_input') }}
+                        {{ password_input(label='New Password', placeholder='Enter your new password', input_class='full_rounded_input') }}
+                        {{ password_input(label='Confirm New password', placeholder='Enter your confirm password', input_class='full_rounded_input') }}
+                    </div>
+                </form>
+            </div>
+            <div class="flex gap-4  justify-end ">
+                {% call Button(class_name='mt-5 max-w-[200px] w-full', button_class='default_button') %}
+                    <span>Update</span>
+                {% endcall %}
+            </div>
+        {% endcall %}
+    </div>
+{% endblock %}
