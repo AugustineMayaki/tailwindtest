@@ -1580,6 +1580,11 @@ body {
   padding-bottom: 10px;
 }
 
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
 .\!pr-11 {
   padding-right: 2.75rem !important;
 }
@@ -2096,6 +2101,11 @@ h1 {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
+
+  .\38 80\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -2148,6 +2158,11 @@ h1 {
   .\31 180\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+
+  .\31 180\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 }
 
