@@ -189,10 +189,6 @@ def patient_info(patient_id: int):
         abort(404)
     return render_template('modules/patients/patient_info.html', patient=patient)
 
-@app.route("/patients/new")
-def new_patient():
-    # Placeholder create form page
-    return render_template('pages/patient_new.html', )
 
 @app.route("/users-management")
 def users_management():

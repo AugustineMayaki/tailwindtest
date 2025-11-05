@@ -8,7 +8,7 @@
             {'name': 'Settings', 'url': url_for('settings'), 'icon': '⚙️'}
         ] %}
     <div class="flex w-full h-screen overflow-hidden">
-        {{ sidebar(pages=navigation_pages) }}
+        {{ sidebar(pages=navigation_pages, current_path=request.path) }}
         <main class="relative flex-1 overflow-y-auto bg-slate-100 h-lvh p-5 pt-7 pb-5 hidden-scrollbar {{ extra_class }}">
             {% block main_content %}{% endblock %}
         </main>

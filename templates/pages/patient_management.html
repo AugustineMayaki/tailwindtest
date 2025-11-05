@@ -2,21 +2,18 @@
 {% from "components/card.html" import render as Card %}
 {% from "components/button.html" import render as Button %}
 {% from "modules/dashboard/overview_card.html" import render as overview_cards %}
+{% from "components/modal.html" import render as Modal %}
+{% from "components/Input.html" import render as Input %}
+{% from "components/dropdown.html" import render as Dropdown %}
 {% block main_content %}
     {{ overview_cards(overview_data=patients_overview) }}
-    <div class="max-w-7xl mx-auto mt-6">
+    <div x-data="{ registerModal :  false }" class="max-w-7xl mx-auto mt-6">
         {% set add_button %}
-            <form action='{{ url_for("new_patient") }}' method="get">
+            <div @click="registerModal=true">
                 {% call Button(button_class='default_button !px-3 !text-sm') %}
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 24 24"
-                         fill="currentColor"
-                         class="w-4 h-4">
-                        <path d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z" />
-                    </svg>
                     Add New
                 {% endcall %}
-            </form>
+            </div>
         {% endset %}
         {% call Card(
             container_class='flex flex-col max-h-[calc(100vh-56px)]',
@@ -59,5 +56,107 @@
                 </table>
             </div>
         {% endcall %}
+        {% call Modal(
+            id='registerModal',
+            class_name='max-w-lg',
+            is_open='registerModal'
+            ) %}
+            <h2 class="text-xl font-semibold text-primary-black mb-4">Register a Patient</h2>
+            <form>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center gap-4">
+                        {{ Input(label='First Name', placeholder='Enter first name', input_class='full_rounded_input', name='first_name', id='first_name') }}
+                        {{ Input(label='Last Name', placeholder='Enter last name', input_class='full_rounded_input', name='last_name', id='last_name') }}
+                    </div>
+                    <div class="flex justify-between items-center gap-4">
+                        {{ Input(label='Age', placeholder='Enter age', input_type='number', input_class='full_rounded_input', name='age', id='age') }}
+                        {{ Input(label='Gender', placeholder='Enter gender', input_type='text', input_class='full_rounded_input', name='gender', id='gender') }}
+                    </div>
+                </div>
+                <div class="flex gap-4 justify-end mt-6">
+                    {% call Button(type='button', button_class='default_button !bg-transparent !text-slate-700 border border-slate-300 hover:bg-slate-50', on_click='registerModal = false') %}
+                        Cancel
+                    {% endcall %}
+                    {% call Button(type='button', button_class='default_button', on_click='') %}
+                        Register
+                    {% endcall %}
+                </div>
+            </form>
+        {% endcall %}
     </div>
+    <!-- components/sidebar.html or layouts/private_layout.html -->
+    <aside class="w-64 bg-slate-900 min-h-screen flex flex-col">
+        <!-- Logo & Brand -->
+        <div class="p-6 border-b border-slate-800">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                    <svg class="w-6 h-6 text-primary-blue"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-white">Hospital System</h1>
+                    <p class="text-xs text-slate-400">Stroke Prediction</p>
+                </div>
+            </div>
+        </div>
+        <!-- Navigation -->
+        <nav class="flex-1 px-4 py-6 space-y-1">
+            <!-- Patient Management (Active) -->
+            <a href="#"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg bg-slate-800 text-blue-400 font-medium group">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                </svg>
+                <span>Patient Management</span>
+            </a>
+            <!-- Users Management -->
+            <a href="#"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-all group">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                </svg>
+                <span>Users Management</span>
+            </a>
+            <!-- Activity Log -->
+            <a href="#"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-all group">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                </svg>
+                <span>Activity Log</span>
+            </a>
+            <!-- Settings -->
+            <a href="#"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-all group">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                </svg>
+                <span>Settings</span>
+            </a>
+        </nav>
+        <!-- User Profile & Logout -->
+        <div class="p-4 border-t border-slate-800">
+            <!-- User Info -->
+            <div class="flex items-center gap-3 px-4 py-3 rounded-lg mb-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
+                    <span class="text-white font-semibold text-sm">AD</span>
+                </div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium text-white">Admin User</p>
+                    <p class="text-xs text-slate-400">admin@hospital.com</p>
+                </div>
+            </div>
+            <!-- Logout Button -->
+            <button class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-red-400 transition-all w-full group">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
 {% endblock %}

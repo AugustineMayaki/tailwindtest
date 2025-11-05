@@ -2,7 +2,22 @@
 {% from "components/card.html" import render as Card %}
 {% from "components/button.html" import render as Button %}
 {% from "components/Input.html" import render as Input %}
+{% from "components/dropdown.html" import render as Dropdown %}
 {% block main_content %}
+    {% set options = [
+        {
+            "label": "Active",
+            "value": "active"
+        },
+        {
+            "label": "Inactive",
+            "value": "inactive"
+        },
+        {
+            "label": "Pending",
+            "value": "pending"
+        }
+    ] %}
     <div class="max-w-7xl mx-auto flex flex-col gap-6">
         {% set add_button %}
             <form action='{{ url_for("patient_management") }}' method="get">
@@ -22,9 +37,25 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {{ Input(label='First Name', placeholder='Enter your first name', input_class='full_rounded_input') }}
                         {{ Input(label='Last Name', placeholder='Enter your last name', input_class='full_rounded_input') }}
-                        {{ Input(label='Email address', placeholder='Enter your email address', input_class='full_rounded_input') }}
+                        {#{{ Input(label='Email address', placeholder='Enter your email address', input_class='full_rounded_input') }}#}
                         {{ Input(label='Gender', placeholder='Enter your email address', input_class='full_rounded_input') }}
                         {{ Input(label='Age', placeholder='Enter your age', input_class='full_rounded_input') }}
+                    </div>
+                </form>
+            </div>
+            <div class="flex gap-4  justify-end ">
+                {% call Button(class_name='mt-5 max-w-[200px] w-full', button_class='default_button') %}
+                    <span>Update</span>
+                {% endcall %}
+            </div>
+        {% endcall %}
+        {% call Card(
+            container_class='flex flex-col max-h-[calc(100vh-100px)]',
+            title='Assessment',
+            ) %}
+            <div class="flex flex-col flex-1 overflow-y-auto hidden-scrollbar">
+                <form action="">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {{ Input(label='Hypertensiv Status', placeholder='Enter your email address', input_class='full_rounded_input') }}
                         {{ Input(label='Marital Status', placeholder='Enter your email address', input_class='full_rounded_input') }}
                         {{ Input(label='Occupation Status', placeholder='Enter your email address', input_class='full_rounded_input') }}
@@ -34,16 +65,13 @@
             </div>
             <div class="flex gap-4  justify-end ">
                 {% call Button(class_name='mt-5 max-w-[200px] w-full', button_class='default_button') %}
-                    <span>Update</span>
-                {% endcall %}
-                {% call Button(class_name='mt-5 max-w-[200px] w-full', button_class='default_button') %}
-                    <span>New Assessment</span>
+                    <span>Run Assessment</span>
                 {% endcall %}
             </div>
         {% endcall %}
         {% call Card(
             container_class='flex flex-col max-h-[calc(100vh-56px)]',
-            title='Assessments',
+            title='Assessment History',
             ) %}
             <div class="flex flex-col flex-1 overflow-y-auto hidden-scrollbar">
                 <table class="min-w-full divide-y divide-slate-200">
