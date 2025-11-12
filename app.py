@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, request, redirect, url_for, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
@@ -157,9 +157,59 @@ PATIENTS_OVERVIEW=[
     }
 ]
 
-@app.route("/")
+USERS=[]
+
+@app.route("/", methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        email = request.form.get('email', '').strip()
+        password = request.form.get('password', '').strip()
+        if email and password:
+            USERS.append({
+                'email': email, 
+                'password': password,
+            })   
+            flash('Login successful!', 'success')
+            return redirect(url_for('patient_management'))
+        else:
+            flash('Please enter both email and password', 'error')
+            return render_template('pages/auth/login.html')
+    
     return render_template('pages/auth/login.html')
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        first_name = request.form.get('first_name', '').strip()
+        last_name = request.form.get('last_name', '').strip()
+        email = request.form.get('email', '').strip()
+        password = request.form.get('password', '').strip()
+        role = request.form.get('role', '').strip()
+        
+        # Validate all required fields
+        if not all([first_name, last_name, email, password, role]):
+            flash('All fields are required', 'error')
+            return render_template('pages/auth/register.html')
+        
+        # Check if email already exists
+        if any(user['email'] == email for user in USERS):
+            flash('Email already registered', 'error')
+            return render_template('pages/auth/register.html')
+        
+        # Register the user
+        USERS.append({
+            'first_name': first_name,
+            'last_name': last_name,
+            'email': email,
+            'password': password,
+            'role': role,
+            'full_name': f"{first_name} {last_name}"
+        })
+        
+        flash('Registration successful! You can now login.', 'success')
+        return redirect(url_for('login'))
+    
+    return render_template('pages/auth/register.html')
 
 @app.route("/forgot-password")
 def forgot_password():
@@ -192,7 +242,7 @@ def patient_info(patient_id: int):
 
 @app.route("/users-management")
 def users_management():
-    return render_template('pages/users_management.html', users_overview=USERS_OVERVIEW)
+    return render_template('pages/users_management.html', users_overview=USERS_OVERVIEW, users=USERS)
 
 @app.route("/activity-log")
 def activity_log():

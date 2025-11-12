@@ -11,12 +11,7 @@
     required=False
     ) %}
     <div class="relative mt-3 {{ class_name }}">
-        {% if label %}
-            <label for="{{ id }}" class="input_label">
-                {{ label }}
-                {% if required %}<span class="text-red-500 ml-1">*</span>{% endif %}
-            </label>
-        {% endif %}
+        {% if label %}<label for="{{ id }}" class="input_label">{{ label }}</label>{% endif %}
         <div class="relative">
             <select id="{{ id }}"
                     {% if name %}name="{{ name }}"{% endif %}

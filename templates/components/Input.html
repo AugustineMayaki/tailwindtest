@@ -12,7 +12,9 @@
   disabled=False,
   name='',
   id='',
-  value=''
+  value='',
+  type='text',
+  required=False
   ) %}
   <div class="relative mt-3 {{ container_class }}">
     {% if label %}
@@ -27,6 +29,9 @@
       {% endif %} -->
       <input type="{{ input_type }}"
              {% if name %}name="{{ name }}"{% endif %}
+             {% if type %}type="{{ type }}"{% endif %}
+             {% if required %}required{% endif %}
+             {% if id %}id="{{ id }}"{% endif %}
              {% if value %}value="{{ value }}"{% endif %}
              {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
              {% if disabled %}disabled{% endif %}
