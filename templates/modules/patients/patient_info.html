@@ -2,20 +2,26 @@
 {% from "components/card.html" import render as Card %}
 {% from "components/button.html" import render as Button %}
 {% from "components/Input.html" import render as Input %}
-{% from "components/dropdown.html" import render as Dropdown %}
+{% from "components/simple_dropdown.html" import render as SimpleDropdown %}
 {% block main_content %}
-    {% set options = [
+    {% set options = [{"label": "Yes", "value": "yes"}, {"label": "No", "value": "no"}] %}
+    {% set residenceType_options = [{"label": "Urban", "value": "urban"}, {"label": "Rural", "value": "rural"}] %}
+    {% set smoking_status_options = [
         {
-            "label": "Active",
-            "value": "active"
+            "label": "Formerly smoked",
+            "value": "formerly_smoked"
         },
         {
-            "label": "Inactive",
-            "value": "inactive"
+            "label": "Never smoked",
+            "value": "never_smoked"
         },
         {
-            "label": "Pending",
-            "value": "pending"
+            "label": "Smokes",
+            "value": "smokes"
+        },
+        {
+            "label": "Unknown",
+            "value": "unknown"
         }
     ] %}
     <div class="max-w-7xl mx-auto flex flex-col gap-6">
@@ -56,10 +62,44 @@
             <div class="flex flex-col flex-1 overflow-y-auto hidden-scrollbar">
                 <form action="">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {{ Input(label='Hypertensiv Status', placeholder='Enter your email address', input_class='full_rounded_input') }}
-                        {{ Input(label='Marital Status', placeholder='Enter your email address', input_class='full_rounded_input') }}
-                        {{ Input(label='Occupation Status', placeholder='Enter your email address', input_class='full_rounded_input') }}
-                        {{ Input(label='Residence Status', placeholder='Enter your email address', input_class='full_rounded_input') }}
+                        {{ SimpleDropdown(id='occupationStatus',
+                                                name='occupationStatus',
+                                                label='Occupation Status',
+                                                options=options,
+                                                placeholder='Select',
+                                                class_name='w-full',) }}
+                        {{ SimpleDropdown(id='isMarried',
+                                                name='isMarried',
+                                                label='Marital Status',
+                                                options=options,
+                                                placeholder='Select',
+                                                class_name='w-full',) }}
+                        {{ SimpleDropdown(id='residenceType',
+                                                name='residenceType',
+                                                label='Residence type',
+                                                options=residenceType_options,
+                                                placeholder='Select',
+                                                class_name='w-full',) }}
+                        {{ SimpleDropdown(id='hypertensivStatus',
+                                                name='hypertensivStatus',
+                                                label='Hypertensiv Status',
+                                                options=options,
+                                                placeholder='Select',
+                                                class_name='w-full',) }}
+                        {{ SimpleDropdown(id=' smokingStatus',
+                                                name='smokingStatus',
+                                                label=' Smoking status',
+                                                options=smoking_status_options,
+                                                placeholder='Select',
+                                                class_name='w-full',) }}
+                        {{ Input(label='Average Glucose', placeholder='Enter average glucose level', input_class='full_rounded_input') }}
+                        {{ Input(label='BMI', placeholder='Enter  BMI', input_class='full_rounded_input') }}
+                        {{ SimpleDropdown(id='isMarried',
+                                                name='isMarried',
+                                                label='Marital Status',
+                                                options=options,
+                                                placeholder='Select',
+                                                class_name='w-full',) }}
                     </div>
                 </form>
             </div>
