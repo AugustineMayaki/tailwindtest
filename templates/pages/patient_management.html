@@ -4,8 +4,22 @@
 {% from "modules/dashboard/overview_card.html" import render as overview_cards %}
 {% from "components/modal.html" import render as Modal %}
 {% from "components/Input.html" import render as Input %}
-{% from "components/dropdown.html" import render as Dropdown %}
+{% from "components/simple_dropdown.html" import render as SimpleDropdown %}
 {% block main_content %}
+    {% set options = [
+        {
+            "label": "Male",
+            "value": "male"
+        },
+        {
+            "label": "Female",
+            "value": "female"
+        },
+        {
+            "label": "Other",
+            "value": "other"
+        }
+    ] %}
     {{ overview_cards(overview_data=patients_overview) }}
     <div x-data="{ registerModal :  false }" class="max-w-7xl mx-auto mt-6">
         {% set add_button %}
@@ -69,8 +83,13 @@
                         {{ Input(label='Last Name', placeholder='Enter last name', input_class='full_rounded_input', name='last_name', id='last_name') }}
                     </div>
                     <div class="flex justify-between items-center gap-4">
-                        {{ Input(label='Age', placeholder='Enter age', input_type='number', input_class='full_rounded_input', name='age', id='age') }}
-                        {{ Input(label='Gender', placeholder='Enter gender', input_type='text', input_class='full_rounded_input', name='gender', id='gender') }}
+                        {{ Input(label='Age', placeholder='Enter age', input_type='number', input_class='full_rounded_input', name='age', id='age', container_class='flex-1') }}
+                        {{ SimpleDropdown(id='gender',
+                                                name='gender',
+                                                label='Gender',
+                                                options=options,
+                                                placeholder='Select Gender',
+                                                class_name='flex-1') }}
                     </div>
                 </div>
                 <div class="flex gap-4 justify-end mt-6">
